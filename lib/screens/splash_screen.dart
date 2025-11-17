@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kyzylkya996/features/home/home_screen.dart';
-import 'package:audioplayers/audioplayers.dart';
-import '../utils/sound_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   final bool isDark;
@@ -50,14 +47,12 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _controller, curve: Curves.easeIn),
     );
 
-    // Ken Burns: slow scale in/out
+    // Optional Ken Burns disabled to match strict cover-fit without extra zoom
     _kenBurnsController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 16),
-    )..repeat(reverse: true);
-    _kbScale = Tween<double>(begin: 1.0, end: 1.08).animate(
-      CurvedAnimation(parent: _kenBurnsController, curve: Curves.easeInOut),
     );
+    _kbScale = const AlwaysStoppedAnimation(1.0);
 
     // Pulse for ornament and text glow
     _pulseController = AnimationController(
@@ -152,38 +147,23 @@ class _SplashScreenState extends State<SplashScreen>
         opacity: _opacity,
         child: Stack(
           children: [
-            // Background splash image
+            // Background splash image (object-fit: cover)
             Positioned.fill(
-              child: AnimatedBuilder(
-                animation: _kbScale,
-                builder: (context, child) => Transform.scale(
-                  scale: _kbScale.value,
-                  child: child,
-                ),
-                child: Builder(
-                  builder: (context) {
-                    if (!_imageReady) {
+              child: Builder(
+                builder: (context) {
+                  if (!_imageReady) {
+                    return const ColoredBox(color: Colors.black);
+                  }
+                  return Image.asset(
+                    _splashPath,
+                    fit: BoxFit.cover, // CSS-like object-fit: cover
+                    alignment: Alignment.center,
+                    filterQuality: FilterQuality.high,
+                    errorBuilder: (context, error, stackTrace) {
                       return const ColoredBox(color: Colors.black);
-                    }
-                    final mq = MediaQuery.of(context);
-                    final width = (mq.size.width * mq.devicePixelRatio * 1.1)
-                        .clamp(1, 8192)
-                        .toInt();
-                    final height = (mq.size.height * mq.devicePixelRatio * 1.1)
-                        .clamp(1, 8192)
-                        .toInt();
-                    return Image.asset(
-                      _splashPath,
-                      fit: BoxFit.cover,
-                      cacheWidth: width,
-                      cacheHeight: height,
-                      filterQuality: FilterQuality.high,
-                      errorBuilder: (context, error, stackTrace) {
-                        return const ColoredBox(color: Colors.black);
-                      },
-                    );
-                  },
-                ),
+                    },
+                  );
+                },
               ),
             ),
 
