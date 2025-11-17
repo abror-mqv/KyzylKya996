@@ -1,0 +1,85 @@
+name: kyzylkya996
+description: "Кызыл-Кыя 996 - приложение для объявлений"
+publish_to: 'none'
+version: 2.0.1+6
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  font_awesome_flutter: ^10.4.0
+  provider: ^6.1.1
+  url_launcher: ^6.2.5
+  cached_network_image: ^3.4.1
+  carousel_slider: ^5.1.1
+  share_plus: ^11.0.0
+  shared_preferences: ^2.2.2
+  http: ^1.4.0
+  shimmer: ^3.0.0
+  custom_refresh_indicator: ^4.0.1
+  flutter_bloc: ^8.1.4
+
+  # 🌐 Локализация
+  flutter_localizations:
+    sdk: flutter
+  easy_localization: ^3.0.3
+  intl: ^0.20.2
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.1.0
+  lottie: ^3.3.1
+  flutter_staggered_animations: ^1.1.1
+  path_provider: ^2.1.2
+  sqflite: ^2.3.2
+  audioplayers: ^5.2.1
+  package_info_plus: ^8.0.0
+  firebase_core: ^4.2.0
+  firebase_messaging: ^16.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+    # - assets/images/header_drawer.png
+    # - assets/images/header_drawer.svg
+    # - assets/images/header_pattern.svg
+    - assets/images/kg_flag.png
+    - assets/images/ru_flag.png
+    - assets/images/drawe.png
+    - assets/images/logo_123.png
+    # - assets/images/splash_bg.jpg
+    - assets/translations/    
+    - assets/icon/   # Переводы
+    - assets/animations/
+    - assets/sounds/
+    - assets/images/pattern.svg
+    
+    - assets/splashes/splash_1.JPG
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+    - family: Arsenal
+      fonts:
+        - asset: assets/fonts/Arsenal-Regular.ttf
+        - asset: assets/fonts/Arsenal-Bold.ttf
+          weight: 700
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo_123.png"
+  adaptive_icon_background: "#1E3A8A"
+  adaptive_icon_foreground: "assets/images/logo_123.png"
